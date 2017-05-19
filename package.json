@@ -1,0 +1,41 @@
+{
+  "name": "@bleve/cync",
+  "version": "0.1.0",
+  "description": "Flux Simplified immutable data store with syncable react component",
+  "main": "./lib/index.js",
+  "author": {
+    "name": "BLeve Inc",
+    "email": "info@bleve.co"
+  },
+  "scripts": {
+    "prepublish": "./node_modules/.bin/babel src/ --out-dir lib/"
+  },
+  "bugs": {
+    "url": "https://github.com/bleveinc/cync/issues"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "immutable": "*",
+    "react": "*"
+  },
+  "homepage": "https://github.com/bleveinc/cync",
+  "keywords": [
+    "react",
+    "flux",
+    "store",
+    "immutable"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "immutable": "*",
+    "react": "*"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bleveinc/cync.git"
+  }
+}
