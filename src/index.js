@@ -1,12 +1,13 @@
-'use strict';
+import Store from './store'
+import Component from './component'
+import createContainer from './container'
 
-import Store from './store';
-import Component from './component';
-
-export { Store };
-export { Component };
+export { Store }
+export { Component }
+export { createContainer }
 
 export default {
   Store,
   Component,
-};
+  createContainer,
+}

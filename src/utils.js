@@ -1,6 +1,4 @@
-'use strict';
-
-import Immutable from 'immutable';
+import Immutable from 'immutable'
 
 /**
  * Checks if object is an Immutalbe object with
@@ -20,10 +18,10 @@ import Immutable from 'immutable';
  */
 
 export function isImmutable(obj, type) {
-  if (typeof type !== 'undefined') { return (obj instanceof type); }
+  if (typeof type !== 'undefined') { return (obj instanceof type) }
   // all Immutable.js objects have the same `toSeq` function
   // so we can just pick from one to test againt
-  return (obj || {}).toSeq === Immutable.Map.prototype.toSeq;
+  return (obj || {}).toSeq === Immutable.Map.prototype.toSeq
 }
 
 
@@ -39,23 +37,27 @@ export function isImmutable(obj, type) {
  */
 
 export function shallowEqual(objA, objB) {
-  if (objA === objB) { return true; }
+  if (objA === objB) { return true }
 
-  if (!objA || !objB) { return false; }
+  if (!objA || !objB) { return false }
 
-  if (typeof objA !== 'object' || typeof objB !== 'object') { return false; }
+  if (typeof objA !== 'object' || typeof objB !== 'object') { return false }
 
   // Test for A's keys different from B.
-  for (let key in objA) {
-    if (objA.hasOwnProperty(key) && (!objB.hasOwnProperty(key) || objA[key] !== objB[key])) {
-      return false;
+  Object.keys(objA).forEach(key => {
+    if (Object.prototype.hasOwnProperty.call(objA, key) &&
+      (!Object.prototype.hasOwnProperty.call(objB, key) ||
+        objA[key] !== objB[key])) {
+      return false
     }
-  }
+  })
+
   // Test for B's keys missing from A.
-  for (let key in objB) {
-    if (objB.hasOwnProperty(key) && !objA.hasOwnProperty(key)) {
-      return false;
+  Object.keys(objB).forEach(key => {
+    if (Object.prototype.hasOwnProperty.call(objB, key) &&
+      !Object.prototype.hasOwnProperty.call(objA, key)) {
+      return false
     }
-  }
-  return true;
+  })
+  return true
 }

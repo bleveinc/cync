@@ -1,9 +1,8 @@
-'use strict'
-
-import React from 'react';
-import Immutable from 'immutable';
-import Store from './store';
-import { shallowEqual } from './utils';
+import React from 'react'
+import Immutable from 'immutable'
+import PropTypes from 'prop-types'
+import Store from './store'
+import { shallowEqual } from './utils'
 
 /**
  * Cync.Component React Component
@@ -39,48 +38,44 @@ import { shallowEqual } from './utils';
 
 class Component extends React.Component {
   static propTypes = {
-    store: React.PropTypes.object,
-    children: React.PropTypes.array,
+    store: PropTypes.object,
+    children: PropTypes.array.isRequired,
   };
 
   constructor(props) {
-    super(props);
-    this.store = (typeof props.store === 'undefined') ? new Store() : props.store;
-    this.state = this.store.state.toObject();
-    this.store._stateDidChange = (storeState) => {
-      Store.prototype._stateDidChange.call(this.store, storeState);
-      this._syncWithStore(storeState);
-    };
-  }
-
-  shouldComponentSync() {
-    return true;
-  }
-
-  _syncWithStore(storeState) {
-    if (Immutable.is(storeState, Immutable.Map(this.state))) {
-      return false;
-    }
-    if (!this.shouldComponentSync(storeState)) {
-      return false;
-    }
-
-    this.setState(storeState.toObject());
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    if (!Immutable.is(this.store.state, Immutable.Map(nextState))) {
-      this.store.setState(nextState);
+    super(props)
+    this.state = this.store.state.toObject()
+    this.store._stateDidChange = storeState => {
+      Store.prototype._stateDidChange.call(this.store, storeState)
+      this._syncWithStore(storeState)
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (!shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState));
-  } 
+    return (!shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState))
+  }
+
+  _syncWithStore(storeState) {
+    if (Immutable.is(storeState, Immutable.Map(this.state))) {
+      return false
+    }
+    if (!this.shouldComponentSync(storeState)) {
+      return false
+    }
+
+    this.setState(storeState.toObject())
+  }
+
+  shouldComponentSync() {
+    return true
+  }
 
   render() {
-    return React.cloneElement(React.Children.only(this.props.children), {data: this.state, store: this.store });
+    return React.cloneElement(
+      React.Children.only(this.props.children),
+      { data: this.state, store: this.store },
+    )
   }
 }
 
-export default Component;
+export default Component

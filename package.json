@@ -1,6 +1,6 @@
 {
   "name": "@bleve/cync",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Flux Simplified immutable data store with syncable react component",
   "main": "./lib/index.js",
   "author": {
@@ -33,7 +33,7 @@
     "immutable": "*",
     "react": "*"
   },
-  "readme": "ERROR: No README data found!",
+  "readme": "README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bleveinc/cync.git"
